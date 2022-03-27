@@ -31,3 +31,8 @@ writer = pd.ExcelWriter(r"C:\Users\yousefi-pc\PycharmProjects\MarksData.xlsx", e
 data_f1.to_excel(writer, sheet_name='Suggestion__1')
 data_f2.to_excel(writer, sheet_name='Suggestion__2')
 data_f3.to_excel(writer, sheet_name='Suggestion__3')
+
+# ********** مشخص کردن تعدا سطرهای جداشده از دیتا فریم ها **********
+data_f11 = data_f1[:400]
+data_f12 = data_f2[:400]
+data_f13 = data_f3[:400]
