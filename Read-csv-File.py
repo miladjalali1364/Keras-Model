@@ -14,4 +14,7 @@ import pandas as pd
 import numpy as np
 import re
 
+# *********** خواندن فایل csv برای گرفتن دیتا و انتقال آن به متغییر ***********
+df = pd.read_csv( r"C:\Users\yousefi-pc\PycharmProjects\data.csv", encoding='utf-8',
+                   index_col=False)
 
