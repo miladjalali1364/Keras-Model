@@ -81,3 +81,18 @@ MarksData.to_excel(writer, sheet_name='Append_Suggestion')
 
 # ********** ذخیره کردن تغییران اعمال شده بر روی فایل اکسل ***********
 writer.save()
+
+print('************ پایان کار پیش پردازش **************')
+
+# ********************* تقسیم داده ها به دو بخش داده Test و Train برای بردار سازی ********************
+Data_Train, Data_Test = train_test_split(MarksData, test_size=0.1)
+
+
+print('***************** Vectorize **********************')
+
+Data_Train = MarksData.head(1000) # 1000 سطر اول از ديتا فريم
+Data_Test = MarksData.tail(200)   # 200 سطر آخر از ديتا فريم
+
+
+clean = pd.get_dummies(MarksData['Suggestion'])
+# print(clean)
