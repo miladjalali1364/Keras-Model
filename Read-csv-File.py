@@ -36,3 +36,7 @@ data_f3.to_excel(writer, sheet_name='Suggestion__3')
 data_f11 = data_f1[:400]
 data_f12 = data_f2[:400]
 data_f13 = data_f3[:400]
+
+# ********** الحاق کردن تمام دیتا فریم ها در sheet مورد نظر **********
+df_append = [data_f11 , data_f12 , data_f13]
+df_append = pd.concat ( df_append )
