@@ -9,7 +9,7 @@ from nltk.corpus import stopwords
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.linear_model import LogisticRegression
-from parsivar import Normalizer, spell_checker
+from parsivar import Normalizer, spell_checker, SpellCheck
 from xlsxwriter import Workbook
 import pandas as pd
 import numpy as np
@@ -44,3 +44,14 @@ df_append = pd.concat(df_append)
 # ********** شافل كردن ديتا فريم، منظور بهم ريختگي ديتا فريم بر اساس سطر هست **********
 df_append = df_append.sample(frac=1).reset_index (drop=True)
 df_append.to_excel( writer, sheet_name='Append_Suggestion')
+
+# *********** ذخیره کردن تغییران اعمال شده بر روی فایل اکسل
+# writer.save()
+
+MarksData = pd.DataFrame (df_append)
+mylist = MarksData['Text'].tolist()
+
+print ( '******************** Tahlil *************************' )
+
+my_normalizer = Normalizer ()  # from parsivar import Normalizer
+myspell_checker = SpellCheck ()  # from parsivar import SpellCheck
