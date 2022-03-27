@@ -16,10 +16,18 @@ import numpy as np
 import re
 
 # *********** خواندن فایل csv برای گرفتن دیتا و انتقال آن به متغییر ***********
-df = pd.read_csv( r"C:\Users\yousefi-pc\PycharmProjects\data.csv", encoding='utf-8',
-                   index_col=False)
+df = pd.read_csv(r"C:\Users\yousefi-pc\PycharmProjects\data.csv", encoding='utf-8',
+                   index_col = False)
 
 # ********* جداسازی دیتا فریم ها (همان گروه بندی ) با استفاده از یک ستون خاص *********
 data_f1 = df[df['Suggestion'] == 1]
 data_f2 = df[df['Suggestion'] == 2]
 data_f3 = df[df['Suggestion'] == 3]
+
+# ********** نوشتن در فایل اکسل و ساخت فایل مورد نظر *********
+writer = pd.ExcelWriter(r"C:\Users\yousefi-pc\PycharmProjects\MarksData.xlsx", engine='xlsxwriter')
+
+# ********** پر کردن شیت ها با استفاده از مقادیر متناطر در فایل اکسل و sheet های متناظر آن **********
+data_f1.to_excel(writer, sheet_name='Suggestion__1')
+data_f2.to_excel(writer, sheet_name='Suggestion__2')
+data_f3.to_excel(writer, sheet_name='Suggestion__3')
