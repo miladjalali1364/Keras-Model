@@ -48,10 +48,28 @@ df_append.to_excel( writer, sheet_name='Append_Suggestion')
 # *********** ذخیره کردن تغییران اعمال شده بر روی فایل اکسل
 # writer.save()
 
-MarksData = pd.DataFrame (df_append)
+MarksData = pd.DataFrame(df_append)
 mylist = MarksData['Text'].tolist()
 
-print ( '******************** Tahlil *************************' )
+print('******************** Tahlil *************************')
 
-my_normalizer = Normalizer ()  # from parsivar import Normalizer
-myspell_checker = SpellCheck ()  # from parsivar import SpellCheck
+my_normalizer = Normalizer()  # from parsivar import Normalizer
+myspell_checker = SpellCheck()  # from parsivar import SpellCheck
+
+#  ********** حذف اعداد- كلمات بي اثر - علائم نگارشی - نرمالایز - فضاهای خالی -**************
+punctuations = '''!()-[]{};:'"\,<>./?@#$%^&*_~0123456789'''
+mylist2 = []
+for String in mylist:
+    string1 = myspell_checker.spell_corrector(
+                             my_normalizer.space_correction(
+                                 (my_normalizer.normalize(String)).strip()))
+
+    text_tokens = word_tokenize(string1)
+    tokens_without_sw = [word for word in text_tokens if not word in stopwords.words('persion')]
+    string1 = (" ").join(tokens_without_sw)
+    no_punct = ""
+    for char in string1:
+        if char not in punctuations:
+            no_punct = no_punct + char
+    mylist2.append(no_punct)
+#    print(no_punct)
