@@ -38,5 +38,9 @@ data_f12 = data_f2[:400]
 data_f13 = data_f3[:400]
 
 # ********** الحاق کردن تمام دیتا فریم ها در sheet مورد نظر **********
-df_append = [data_f11 , data_f12 , data_f13]
-df_append = pd.concat ( df_append )
+df_append = [data_f11, data_f12, data_f13]
+df_append = pd.concat(df_append)
+
+# ********** شافل كردن ديتا فريم، منظور بهم ريختگي ديتا فريم بر اساس سطر هست **********
+df_append = df_append.sample(frac=1).reset_index (drop=True)
+df_append.to_excel( writer, sheet_name='Append_Suggestion')
