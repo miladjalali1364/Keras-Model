@@ -73,3 +73,11 @@ for String in mylist:
             no_punct = no_punct + char
     mylist2.append(no_punct)
 #    print(no_punct)
+
+# ********** اضافه کردن ستون clean به دیتا فریم جاری **********
+MarksData['clean'] = mylist2
+# ********** ثبت دیتا فریم تکمیلی در فایل اکسل و شیت مورد نظر **********
+MarksData.to_excel(writer, sheet_name='Append_Suggestion')
+
+# ********** ذخیره کردن تغییران اعمال شده بر روی فایل اکسل ***********
+writer.save()
