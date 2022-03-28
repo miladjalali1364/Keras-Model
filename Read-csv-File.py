@@ -3,7 +3,7 @@ print ( "------------Import library at first------------" )
 from keras.models import Sequential
 from keras.preprocessing.text import Tokenizer, one_hot
 from keras.preprocessing.sequence import pad_sequences
-from keras.layers import Embedding, convolutional, MaxPooling1D, Dense, Flatten
+from keras.layers import Embedding, convolutional, MaxPooling1D, Dense, Flatten, Conv1D
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from sklearn.model_selection import train_test_split
@@ -114,3 +114,14 @@ arr1 = np.array(encoded_test1)
 # ********** همسان سازی طول بردارها به عبارتی یکسان‌سازی ابعاد بردار ها **********
 Data_Train_p = pad_sequences(encoded_xtrain, maxlen=100, padding='post')
 Data_Test_p = pad_sequences(encoded_test, maxlen=100, padding='post')
+
+# Create the model Keras
+model = Sequential()
+model.add(Embedding(vocab_size, 100, input_length=100))
+model.add(Conv1D(filters=120, kernel_size=1, activation='relu'))
+model.add(MaxPooling1D(pool_size=4))
+model.add(Flatten())
+model.add(Dense(20, activation='relu'))
+model.add(Dense(3, activation='softmax')) # این برای بعد مربوط به Suggestion هست
+print(model.summary())
+model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
