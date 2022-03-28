@@ -125,3 +125,13 @@ model.add(Dense(20, activation='relu'))
 model.add(Dense(3, activation='softmax')) # این برای بعد مربوط به Suggestion هست
 print(model.summary())
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+
+# Fitting Network
+m = model.fit(Data_Train_p, arr, epochs=50, verbose=2)
+
+# Evaluating Network
+loss, acc = model.evaluate(Data_Test_p, arr1, verbose=0)
+print('Test Accuracy: %f' % (acc * 100))
+print('Test loss: %f' % loss)
+# !khashm, khonsa, shadi, gham of 1e4 51%
+# model.save('c_s_4_1e4_CNN_01.model')
