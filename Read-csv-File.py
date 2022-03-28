@@ -87,12 +87,30 @@ print('************ پایان کار پیش پردازش **************')
 # ********************* تقسیم داده ها به دو بخش داده Test و Train برای بردار سازی ********************
 Data_Train, Data_Test = train_test_split(MarksData, test_size=0.1)
 
-
+# OR
 print('***************** Vectorize **********************')
 
-Data_Train = MarksData.head(1000) # 1000 سطر اول از ديتا فريم
-Data_Test = MarksData.tail(200)   # 200 سطر آخر از ديتا فريم
+#Data_Train = MarksData.head(1000) # 1000 سطر اول از ديتا فريم
+#Data_Test = MarksData.tail(200)   # 200 سطر آخر از ديتا فريم
 
-
-clean = pd.get_dummies(MarksData['Suggestion'])
+#clean = pd.get_dummies(MarksData['Suggestion'])
 # print(clean)
+###################################################   ##############################################
+tokenize = Tokenizer()
+tokenize.fit_on_texts(Data_Train['clean'])
+#b=tokenize.fit_on_texts(Data_Test['clean'])
+
+encoded_xtrain = tokenize.texts_to_sequences(Data_Train['clean'])
+encoded_test = tokenize.texts_to_sequences(Data_Test['clean'])
+vocab_size = len(tokenize.word_index) + 1
+
+# ********** تبدیل به لیست می کنیم که خروجی ها همه به صورت لیست باشند **********
+encoded_xtrain1 = (pd.get_dummies(Data_Train['Suggestion'])).values.tolist()
+encoded_test1 = (pd.get_dummies(Data_Test['Suggestion'])).values.tolist()
+
+arr = np.array(encoded_xtrain1)
+arr1 = np.array(encoded_test1)
+
+# ********** همسان سازی طول بردارها به عبارتی یکسان‌سازی ابعاد بردار ها **********
+Data_Train_p = pad_sequences(encoded_xtrain, maxlen=100, padding='post')
+Data_Test_p = pad_sequences(encoded_test, maxlen=100, padding='post')
