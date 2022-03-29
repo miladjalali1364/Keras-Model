@@ -89,5 +89,43 @@ The Embedding layer is defined as the first hidden layer of a network. It must s
        model.add(Dense(20, activation='relu')) 
        model.add(Dense(3, activation='softmax')) 
        print(model.summary())
-       model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+
+**Step-3) Compile The Keras Model**<br>
+
+When we compile the Keras model, it uses the backend numerical libraries such as TensorFlow or Theano. Whatever backend you are using automatically chooses the best way to represent the network on your hardware such as CPU, GPU, or TPU.
+
+When we are compiling the model we must specify some additional parameters to better evaluate the model and to find the best set of weights to map inputs to outputs.
+
+   **Loss Function** – one must specify the loss function to evaluate the set of weights on which model will be mapped. we will use cross-entropy as a loss function which is actually known as binary cross-entropy used for binary classification.
+   
+   **Optimizer** – second is the optimizer to optimize the loss. we will use adam which is a popular version of gradient descent and gives the best result in most problems.
+   
+     model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+
+**Step-4) Start Training (Fit the Model)**
+
+After successful compilation of the model, we are ready to fit data to the model and start training the neural network. Along with providing data to model, we need to define a number of epochs and batch size over which training occurs.
+
+   **Epoch** – one single pass through all the rows in the training dataset
+  
+   **Batch size** – number of samples considered by the model before updating the weights.
+   
+      model.fit(Data_Train_p, arr, epochs=50, verbose=2)
+One epoch can be comprised of more than one batch. These parameters are finally decided after the heat and trial method.
+
+**Step-5) Evaluate the Model**
+
+    loss, acc = model.evaluate(Data_Test_p, arr1, verbose=0)
+    print('Test Accuracy: %f' % (acc * 100))
+    print('Test loss: %f' % loss)
+To evaluate the model use the evaluate method and pass the input and output to the model and check the performance.
+
+
+# EndNote
+
+A neural network builds a network of connected layers with multiple neurons in each layer. As we increase the number of layers the network is capable to learn more complex features.
+
+You have easily build your first Neural Network model using Keras. I hope it was easy to catch all the things,
+
+     
 
