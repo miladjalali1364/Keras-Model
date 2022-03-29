@@ -31,6 +31,10 @@ Neural Networks are used to perform many complex tasks including Image Classific
    We will build a simple Artificial Neural network using Keras step by step that will help you to create your own model in the future.<br>
    
 **Step-1) Load Data**<br>
+df = pd.read_csv(r"C:\Users\...\PycharmProjects\data.csv", encoding='utf-8',
+                   index_col = False)
 
+**Step-2) Define Keras Model**<br>
+Model in Keras always defines as a sequence of layers. It means that we initialize the sequence model and add the layers one after the other which is executed as the sequence of the list. Practically we have to try experimenting with the process of adding and removing the layers until we are happy with our architecture.
     
     
